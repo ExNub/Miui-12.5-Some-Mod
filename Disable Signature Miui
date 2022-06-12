@@ -1,0 +1,204 @@
+Disabling Checks, Integrity and Signature of Files
+
+####################################
+Dc Core-oj.jar
+==========================================================
+ smali\java\security\MessageDigest.smali
+==========================================================
+.method public static isEqual([B[B)Z
+    .registers 3
+
+    const/4 v0, 0x1
+
+    return v0
+.end method
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+==========================================================
+ smali\java\security\Signature.smali
+==========================================================
+.method public final verify([B)Z
+    .registers 3
+    .annotation system Ldalvik/annotation/Throws;
+        value = {
+            Ljava/security/SignatureException;
+        }
+    .end annotation
+
+    const/4 v0, 0x1
+
+    return v0
+.end method
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+.method public final verify([BII)Z
+    .registers 5
+    .annotation system Ldalvik/annotation/Throws;
+        value = {
+            Ljava/security/SignatureException;
+        }
+    .end annotation
+
+    const/4 v0, 0x1
+
+    return v0
+.end method
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+.method private verifyManifestHash(Ljava/util/jar/Manifest;Lsun/security/util/ManifestDigester;Ljava/util/List;)Z
+    .registers 16
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Ljava/util/jar/Manifest;",
+            "Lsun/security/util/ManifestDigester;",
+            "Ljava/util/List<",
+            "Ljava/lang/Object;",
+            ">;)Z"
+        }
+    .end annotation
+
+    .annotation system Ldalvik/annotation/Throws;
+        value = {
+            Ljava/io/IOException;,
+            Ljava/security/SignatureException;
+        }
+    .end annotation
+
+    const/4 v0, 0x1
+
+    return v0
+.end method
+
+####################################
+Dc Services.jar
+==========================================================
+smali\com\miui\server\SecurityManagerService.smali
+==========================================================
+.method private checkAppSignature([Landroid/content/pm/Signature;Ljava/lang/String;Z)Z
+    .registers 5
+
+    const/4 v0, 0x1
+
+    return v0
+.end method
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+""""Here we have disabled version checking and allow you to install a lower version of the application""""
+
+.method private static checkDowngrade(Landroid/content/pm/PackageParser$Package;Landroid/content/pm/PackageInfoLite;)V
+    .registers 9
+    .annotation system Ldalvik/annotation/Throws;
+        value = {
+            Lcom/android/server/pm/PackageManagerException;
+        }
+    .end annotation
+
+    const/4 v0, 0x0
+
+    return-void
+.end method
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+.method private checkSysAppCrack()Z
+    .registers 2
+
+    const/4 v0, 0x1
+
+    return v0
+.end method
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+.method private checkSystemSelfProtection(Z)V
+    .registers 3
+
+    return-void
+.end method
+==========================================================
+smali\com\android\server\pm\PackageManagerServiceUtils.smali
+==========================================================
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+.method public static compareSignatures([Landroid/content/pm/Signature;[Landroid/content/pm/Signature;)I
+    .registers 10
+
+    const/4 v1, 0x0
+
+    return v1
+.end method
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+.method private static matchSignaturesCompat(Ljava/lang/String;Lcom/android/server/pm/PackageSignatures;Landroid/content/pm/PackageParser$SigningDetails;)Z
+    .locals 11
+
+    const/4 v0, 0x0
+
+    return v0
+.end method
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+.method private static matchSignaturesRecover(Ljava/lang/String;Landroid/content/pm/PackageParser$SigningDetails;Landroid/content/pm/PackageParser$SigningDetails;I)Z
+    .locals 4
+    .param p3    # I
+        .annotation build Landroid/content/pm/PackageParser$SigningDetails$CertCapabilities;
+        .end annotation
+    .end param
+
+    const/4 v0, 0x0
+
+    return v0
+.end method
+==========================================================
+smali\com\android\server\pm\PackageManagerService$InstallParams.smali
+==========================================================
+Find : .method private installLocationPolicy(Landroid/content/pm/PackageInfoLite;)I
+
+Attention, your vX registers may be different!
+replace : 
+
+and-int/lit8 v2, v2, 0x8 >>to<< or-int/lit8 v2, v2, 0x8
+
+and-int/lit16 v9, v9, 0x80 >>to<< or-int/lit16 v9, v9, 0x80
+
+and-int/2addr v10, v8 >>to<< and-int/2addr v10, v8
+
+####################################
+Dc Framework.jar
+==========================================================
+smali\android\content\pm\PackageParser$SigningDetails.smali
+==========================================================
+.method public checkCapability(Landroid/content/pm/PackageParser$SigningDetails;I)Z
+    .registers 4
+    .param p2    # I
+        .annotation build Landroid/content/pm/PackageParser$SigningDetails$CertCapabilities;
+        .end annotation
+    .end param
+
+    const/4 v0, 0x1
+
+    return v0
+.end method
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+.method public checkCapability(Ljava/lang/String;I)Z
+    .registers 4
+    .param p2    # I
+        .annotation build Landroid/content/pm/PackageParser$SigningDetails$CertCapabilities;
+        .end annotation
+    .end param
+
+    const/4 v0, 0x1
+
+    return v0
+.end method
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+.method public checkCapabilityRecover(Landroid/content/pm/PackageParser$SigningDetails;I)Z
+    .registers 4
+    .param p2    # I
+        .annotation build Landroid/content/pm/PackageParser$SigningDetails$CertCapabilities;
+        .end annotation
+    .end param
+    .annotation system Ldalvik/annotation/Throws;
+        value = {
+            Ljava/security/cert/CertificateException;
+        }
+    .end annotation
+
+    const/4 v0, 0x1
+
+    return v0
+.end method
+####################################
+Recompile all .jar files
+Push to original location
+Source : https://4pda.to/forum/index.php?showtopic=760281&st=8840#entry89753213
